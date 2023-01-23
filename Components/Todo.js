@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Button, Divider, Grid, Paper, TextField } from "@mui/material";
 import List from "@/Components/List";
+import { toast } from "react-toastify";
 
 const Todo = ({ data }) => {
   const [value, setValue] = useState("");
@@ -14,6 +15,7 @@ const Todo = ({ data }) => {
     let id = Math.floor(Math.random() * (500 - 3 + 1)) + 3;
     setTodoList([...todoList, { id, value }]);
     setValue("");
+    toast.success("Task added successfully");
   }, [todoList, value]);
 
   return (

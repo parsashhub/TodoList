@@ -12,16 +12,20 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import WrapperDialog from "@/reuseable/MyDialog";
+import { toast } from "react-toastify";
 
 const List = ({ setList, list }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
 
   const handleDelete = useCallback(
-    (id) => {
+    (id, bool) => {
       let arr = [...list];
       let filtered = arr.filter((x) => x?.id !== id);
       setList(filtered);
+      if (bool) {
+        toast.error("Task deleted successfully");
+      } else toast.success("Task Completed");
     },
     [list]
   );
@@ -30,6 +34,7 @@ const List = ({ setList, list }) => {
     (data) => {
       setValue(data);
       setOpen(true);
+      toast.info("Task edited successfully");
     },
     [list, open]
   );
@@ -83,12 +88,12 @@ const List = ({ setList, list }) => {
                 </IconButton>
               </Tooltip>
               <Tooltip title="Delete Task">
-                <IconButton onClick={() => handleDelete(item?.id)}>
+                <IconButton onClick={() => handleDelete(item?.id, true)}>
                   <DeleteIcon sx={{ color: "#d42727" }} />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Complete Task">
-                <IconButton onClick={() => handleDelete(item?.id)}>
+                <IconButton onClick={() => handleDelete(item?.id, false)}>
                   <CheckIcon sx={{ color: "#54a608" }} />
                 </IconButton>
               </Tooltip>

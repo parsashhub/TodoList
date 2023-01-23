@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Todo from "@/Components/Todo";
 import { Box, Stack } from "@mui/material";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home({ data }) {
   return (
@@ -28,6 +30,19 @@ export default function Home({ data }) {
             <Todo data={data} />
           </Box>
         </Stack>
+        <ToastContainer
+          position="bottom-center"
+          theme="colored"
+          limit={2}
+          rtl={false}
+          autoClose={3000}
+          newestOnTop={true}
+          hideProgressBar={false}
+          pauseOnFocusLoss
+          closeOnClick
+          pauseOnHover
+          draggable
+        />
       </main>
     </>
   );
