@@ -2,19 +2,16 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Button, Divider, Grid, Paper, TextField } from "@mui/material";
 import List from "@/Components/List";
 
-const Todo = () => {
+const Todo = ({ data }) => {
   const [value, setValue] = useState("");
-  const [todoList, setTodoList] = useState([
-    { id: 0, value: "buy some groceries!" },
-    { id: 1, value: "go to the gym." },
-  ]);
+  const [todoList, setTodoList] = useState(data);
 
   useEffect(() => {
     localStorage.setItem("list", JSON.stringify(todoList));
   }, [todoList]);
 
   const handleAdd = useCallback(() => {
-    let id = Math.floor(Math.random() * (500 - 2 + 1)) + 2;
+    let id = Math.floor(Math.random() * (500 - 3 + 1)) + 3;
     setTodoList([...todoList, { id, value }]);
     setValue("");
   }, [todoList, value]);

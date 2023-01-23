@@ -2,7 +2,7 @@ import Head from "next/head";
 import Todo from "@/Components/Todo";
 import { Box, Stack } from "@mui/material";
 
-export default function Home() {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -25,10 +25,22 @@ export default function Home() {
               padding: "8px",
             }}
           >
-            <Todo />
+            <Todo data={data} />
           </Box>
         </Stack>
       </main>
     </>
   );
 }
+
+export const getStaticProps = () => {
+  return {
+    props: {
+      data: [
+        { id: 0, value: "buy some groceries!" },
+        { id: 1, value: "go to the gym." },
+        { id: 2, value: "watch football game at 7pm." },
+      ],
+    },
+  };
+};
